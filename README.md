@@ -9,6 +9,7 @@
 # And/Or
 `$ rails generate react_on_rails:install`
 
-#Shopify API Keys
-`export SHOPIFY_KEY='the secret key'`
-`export SHOPIFY_PASS='the secret password'`
+# Shopify API Keys
+`export SHOPIFY_KEY='the secret key'`<br>
+`export SHOPIFY_PASS='the secret password'`<br>
+`rails server`
