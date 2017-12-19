@@ -18,10 +18,4 @@ class MugMaker extends React.Component {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const node = document.getElementById('page');
-  render(
-    <MugMaker />,
-    node
-  )
-});
+export default MugMaker;

@@ -5,9 +5,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import MugMaker from '../components/mug_maker'
 
 const Hello = props => (
-  <div>Hello {props.name}!</div>
+  <div>Hello {props.name}!
+  <MugMaker />
+  </div>
 )
 
 Hello.defaultProps = {
