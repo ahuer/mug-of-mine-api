@@ -8,6 +8,7 @@
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-on-rails": "^10.0.2",
     "react_ujs": "^2.4.3"
   },
   "devDependencies": {
