@@ -10,14 +10,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.3'
-gem 'react_on_rails', '10.0.2'
-gem 'sass-rails', '~> 5.0'
 gem 'sqlite3'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'nokogiri', '1.8.1'
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-gem 'webpacker', github: 'rails/webpacker'
 
 group :development, :test do
   gem 'pry-nav'
@@ -42,6 +38,5 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'shopify_api'
 
 gem 'mini_racer', platforms: :ruby
