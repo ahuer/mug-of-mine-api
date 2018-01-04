@@ -14,6 +14,7 @@ gem 'sqlite3'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'nokogiri', '1.8.1'
+gem 'cloudinary'
 
 group :development, :test do
   gem 'pry-nav'
