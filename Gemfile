@@ -10,7 +10,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'rack-cors'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.3'
-gem 'sqlite3'
+gem 'sqlite3', group: :development
+gem 'pg', group: :production
+gem 'rails_12factor'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'nokogiri', '1.8.1'
