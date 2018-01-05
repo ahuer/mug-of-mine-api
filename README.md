@@ -1,4 +1,4 @@
 # mug-of-mine
 
-`$ bundle install`<br>
-`rails server`
+`$ bundle install --without production`<br>
+`$ rails server`

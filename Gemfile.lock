@@ -115,6 +115,9 @@ GEM
     parallel (1.12.1)
     parser (2.4.0.2)
       ast (~> 2.3)
+    pg (0.21.0)
+    pg (0.21.0-x64-mingw32)
+    pg (0.21.0-x86-mingw32)
     powerpack (0.1.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -261,6 +264,7 @@ DEPENDENCIES
   mini_racer
   mocha
   nokogiri (= 1.8.1)
+  pg
   pry-nav
   puma (~> 3.7)
   rack-cors
