@@ -53,14 +53,15 @@ class HomeController < ApplicationController
       return
     end
 
-    shopify_checkout = create_shopify_checkout(shopify_mug)
-
-    unless shopify_checkout.present?
-      render status: 500, json: { message: 'There was an issue adding creating the Shopify checkout' }
-      return
-    end
-
-    render status: 200, json: { checkoutURL: shopify_checkout.web_url }
+    render status: 200, json: { shopifyVariantID: shopify_mug.variants.first.id }
+    # shopify_checkout = create_shopify_checkout(shopify_mug)
+    #
+    # unless shopify_checkout.present?
+    #   render status: 500, json: { message: 'There was an issue adding creating the Shopify checkout' }
+    #   return
+    # end
+    #
+    # render status: 200, json: { checkoutURL: shopify_checkout.web_url }
   end
 
   private
