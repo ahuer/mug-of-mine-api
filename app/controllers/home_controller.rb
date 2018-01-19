@@ -32,7 +32,6 @@ class HomeController < ApplicationController
   end
 
   def submit
-    binding.pry
     cloudinary_image = img_upload(image_params)
     unless cloudinary_image.present?
       render status: 500, json: { message: 'There was a problem loading your image' }
@@ -159,13 +158,18 @@ class HomeController < ApplicationController
     }
   end
 
-  def sync_printful_mug(shopify_mug, cloudinary_image)
+  def sync_printful_mug(shopify_mug, cloudinary_image, retry_num = 0)
     printful_client = PrintfulClient.new(PRINTFUL_API_KEY)
     begin
       pp printful_client.put("sync/variant/@#{shopify_mug.variants.first.id}",printful_request_body(cloudinary_image))
       nil
     rescue PrintfulApiException => e
-        'There was a Printful sync API exception: %i %s' % [e.code, e.message]
+        if (e.code == 404 && retry_num < 3)
+          sleep 1
+          sync_printful_mug(shopify_mug, cloudinary_image, retry_num + 1)
+        else
+          'There was a Printful sync API exception: %i %s' % [e.code, e.message]
+        end
     rescue PrintfulException => e
         'There was a Printful sync exception: ' + e.message
     end
