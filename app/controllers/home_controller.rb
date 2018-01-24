@@ -1,9 +1,13 @@
 # frozen_string_literal: true
+require 'net/https'
+require 'open-uri'
+require 'json'
 
 class HomeController < ApplicationController
   SHOPIFY_API_KEY = ENV['SHOPIFY_API_KEY']
   SHOPIFY_API_PASSWORD = ENV['SHOPIFY_API_PASSWORD']
   PRINTFUL_API_KEY = ENV['PRINTFUL_API_KEY']
+  BUY_BUTTON_CHANNEL_ID = 203390978
 
   def upload
     cloudinary_image = img_upload(image_params)
@@ -45,6 +49,13 @@ class HomeController < ApplicationController
       return
     end
 
+    error_message = publish_to_buy_button(shopify_mug)
+
+    if error_message.present?
+      render status: 500, json: { message: error_message }
+      return
+    end
+
     error_message = sync_printful_mug(shopify_mug, cloudinary_image)
 
     if error_message.present?
@@ -53,6 +64,7 @@ class HomeController < ApplicationController
     end
 
     render status: 200, json: { shopifyVariantID: shopify_mug.variants.first.id }
+
     # shopify_checkout = create_shopify_checkout(shopify_mug)
     #
     # unless shopify_checkout.present?
@@ -138,6 +150,33 @@ class HomeController < ApplicationController
           src: image_url
         }
       ]
+    }
+  end
+
+  def publish_to_buy_button(shopify_mug)
+    url = URI.parse('https://mug-of-mine.myshopify.com/admin/channels/203390978/product_publications.json')
+    req = Net::HTTP::Post.new(url.request_uri, initheader = {'Content-Type' =>'application/json'})
+    req.body = publish_to_buy_button_request_body(shopify_mug).to_json
+    req.basic_auth SHOPIFY_API_KEY, SHOPIFY_API_PASSWORD
+    con = Net::HTTP.new(url.host, url.port)
+    con.use_ssl = true
+
+    begin
+      response = con.start do |http|
+        http.request(req)
+      end
+      nil
+    rescue Exception => e
+      'There was an issue publishing to buy button: ' + e.message
+    end
+  end
+
+  def publish_to_buy_button_request_body(shopify_mug)
+    {
+    	"product_publication": {
+    		"published": true,
+        "product_id": shopify_mug.id
+    	}
     }
   end
 
