@@ -117,12 +117,12 @@ class HomeController < ApplicationController
   def shopify_mug_params(image_url)
     if mug_size_params[:mugSize] == '11oz'
       size = '11oz'
-      price = '19.30'
+      price = '11.95'
       grams = 369
       weight = 13
     else
       size = '15oz'
-      price = '25.73'
+      price = '14.95'
       grams = 454
       weight = 16
     end
