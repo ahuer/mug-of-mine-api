@@ -9,6 +9,10 @@ class HomeController < ApplicationController
   PRINTFUL_API_KEY = ENV['PRINTFUL_API_KEY']
   BUY_BUTTON_CHANNEL_ID = 203390978
 
+  def wakeup
+    render status: 200, json: { message: "I'm awake!" }
+  end
+
   def upload
     cloudinary_image = img_upload(image_params)
     if cloudinary_image.present?
