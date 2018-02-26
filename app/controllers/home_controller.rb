@@ -69,7 +69,8 @@ class HomeController < ApplicationController
 
     render status: 200, json: {
       shopifyVariantID: shopify_mug.variants.first.id,
-      imgUrl: cloudinary_image['secure_url']
+      imgUrl: cloudinary_image['secure_url'],
+      shopifyProduct: shopify_mug
     }
 
     # shopify_checkout = create_shopify_checkout(shopify_mug)
