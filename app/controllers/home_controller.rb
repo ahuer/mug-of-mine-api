@@ -26,7 +26,7 @@ class HomeController < ApplicationController
       }
       render status: 200, json: response
     else
-      render status: 500, json: { message: 'There was a problem loading your image' }
+      render status: 500, json: { message: 'There was a problem loading your image - ensure env keys are set' }
     end
   end
 
@@ -67,7 +67,10 @@ class HomeController < ApplicationController
       return
     end
 
-    render status: 200, json: { shopifyVariantID: shopify_mug.variants.first.id }
+    render status: 200, json: {
+      shopifyVariantID: shopify_mug.variants.first.id,
+      imgUrl: cloudinary_image['secure_url']
+    }
 
     # shopify_checkout = create_shopify_checkout(shopify_mug)
     #
